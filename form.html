@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Form To Google Sheets Demo</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" media="screen" href="style.css">
@@ -11,7 +12,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="main.js"></script>
+
+    <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
+    <script src="https://wzrd.in/standalone/formdata-polyfill@latest"></script>
+    <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+    <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
 
 </head>
 <body>
@@ -19,7 +24,7 @@
                 <div id="form-main">
                     <div id="form-div">
 
-                        <form class="montform" id="reused_form" >
+                        <form class="montform" id="reused_form" name="submit-to-google-sheet">
                             <div class="heading">
                                 <h2 class="change-mfont" id="heading"> Please provide your Info</h2>
                             </div>
@@ -47,16 +52,45 @@
 
                         </form>
 
-                        <div id="error_message" style="width:100%; height:100%; display:none; ">
-                            <h4>
-                                Error
-                            </h4>
-                            Sorry there was an error sending your form. 
-                        </div>
-
-                        <div id="success_message" style="width:100%; height:100%; display:none; "> <h2>Success! Your Message was Sent Successfully.</h2> </div>
                     </div>
                 </div>
             </div>
+
+            <script>
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbwoiM-eEfuB2s9PKyjXxfYkbm10JjpwlO4Gw3vWTbZxe9xvQLg/exec'
+                    const form = document.forms['submit-to-google-sheet']
+                    const loading = document.querySelector('.js-loading')
+                    const successMessage = document.querySelector('.js-success-message')
+                    const errorMessage = document.querySelector('.js-error-message')
+                    form.addEventListener('submit', e => {
+                      e.preventDefault()
+                      showLoadingIndicator()
+                      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                        .then(response => showSuccessMessage(response))
+                        .catch(error => showErrorMessage(error))
+                    })
+                    function showLoadingIndicator () {
+                      form.classList.add('is-hidden')
+                      loading.classList.remove('is-hidden')
+                    }
+                    function showSuccessMessage (response) {
+                      console.log('Success!', response)
+                      setTimeout(() => {
+                        successMessage.classList.remove('is-hidden')
+                        loading.classList.add('is-hidden')
+                      }, 500)
+                    }
+                    function showErrorMessage (error) {
+                      console.error('Error!', error.message)
+                      setTimeout(() => {
+                        errorMessage.classList.remove('is-hidden')
+                        loading.classList.add('is-hidden')
+                      }, 500)
+                    }
+                  </script>
+                  
 </body>
 </html>
+
+
+
