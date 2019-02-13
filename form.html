@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+
+</head>
+<body>
+        <div class="container">
+                <div id="form-main">
+                    <div id="form-div">
+
+                        <form class="montform" id="reused_form" >
+                            <div class="heading">
+                                <h2 class="change-mfont" id="heading"> Please provide your Info</h2>
+                            </div>
+
+                            <p class="name">
+                                <input name="name" type="text" class="feedback-input" required placeholder="Your Name" id="name" />
+                            </p>
+
+                            <p class="email">
+                                <input name="email" type="email" required class="feedback-input" id="email" placeholder="Your Email" />
+                            </p>
+
+                            <p class="url">
+                                <input name="url" type="text" class="feedback-input" id="url" placeholder="Quora link"/>
+                            </p>
+
+                            <p class="text">
+                                <textarea name="message" class="feedback-input" id="comment" placeholder="Your Message"></textarea>
+                            </p>
+
+                            <div class="submit">
+                                <button type="submit" class="button-blue">SUBMIT</button>
+                                <div class="ease"></div>
+                            </div>
+
+                        </form>
+
+                        <div id="error_message" style="width:100%; height:100%; display:none; ">
+                            <h4>
+                                Error
+                            </h4>
+                            Sorry there was an error sending your form. 
+                        </div>
+
+                        <div id="success_message" style="width:100%; height:100%; display:none; "> <h2>Success! Your Message was Sent Successfully.</h2> </div>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>
