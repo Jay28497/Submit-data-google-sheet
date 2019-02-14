@@ -1,96 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Form To Google Sheets Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form To Google Sheets Demo</title>
+  <meta name="description" content="Store HTML form submissions in Google Sheets">
+  <link href="./favicon.png" rel="shortcut icon">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-    <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
-    <script src="https://wzrd.in/standalone/formdata-polyfill@latest"></script>
-    <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
-    <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
-
+  <link rel="stylesheet" href="main.css">
+  
+  <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
+  <script src="https://wzrd.in/standalone/formdata-polyfill@latest"></script>
+  <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+  <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
 </head>
 <body>
-        <div class="container">
-                <div id="form-main">
-                    <div id="form-div">
 
-                        <form class="montform" id="reused_form" name="submit-to-google-sheet">
-                            <div class="heading">
-                                <h2 class="change-mfont" id="heading"> Please provide your Info</h2>
-                            </div>
+  <div class="form-container">
+    <form name="submit-to-google-sheet">
+      <div class="container">
+        <h1>Provide Your Info</h1>
+      </div>
+      <input name="name" type="text" id="name" placeholder="Name">
+      <input name="email" type="email" id="email" placeholder="Email" required>
+      <input name="url" type="text" id="url" placeholder="Quora Link">
+      <input type="text" name="message" id="message" placeholder="Your message">
+      <button type="submit">Submit</button>
+    </form>
 
-                            <p class="name">
-                                <input name="name" type="text" class="feedback-input" required placeholder="Your Name" id="name" />
-                            </p>
+    <div class="loading js-loading is-hidden">
+      <div class="loading-spinner">
+        <svg><circle cx="25" cy="25" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg>
+      </div>
+    </div>
 
-                            <p class="email">
-                                <input name="email" type="email" required class="feedback-input" id="email" placeholder="Your Email" />
-                            </p>
+    <p class="js-success-message is-hidden">Success!</p>
+    <p class="js-error-message is-hidden">Error!</p>
+  </div>
 
-                            <p class="url">
-                                <input name="url" type="text" class="feedback-input" id="url" placeholder="Quora link"/>
-                            </p>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwoiM-eEfuB2s9PKyjXxfYkbm10JjpwlO4Gw3vWTbZxe9xvQLg/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const loading = document.querySelector('.js-loading')
+    const successMessage = document.querySelector('.js-success-message')
+    const errorMessage = document.querySelector('.js-error-message')
 
-                            <p class="text">
-                                <textarea name="message" class="feedback-input" id="comment" placeholder="Your Message"></textarea>
-                            </p>
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      showLoadingIndicator()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => showSuccessMessage(response))
+        .catch(error => showErrorMessage(error))
+    })
 
-                            <div class="submit">
-                                <button type="submit" class="button-blue">SUBMIT</button>
-                                <div class="ease"></div>
-                            </div>
+    function showLoadingIndicator () {
+      form.classList.add('is-hidden')
+      loading.classList.remove('is-hidden')
+    }
 
-                        </form>
+    function showSuccessMessage (response) {
+      console.log('Success!', response)
+      setTimeout(() => {
+        successMessage.classList.remove('is-hidden')
+        loading.classList.add('is-hidden')
+      }, 500)
+    }
 
-                    </div>
-                </div>
-            </div>
+    function showErrorMessage (error) {
+      console.error('Error!', error.message)
+      setTimeout(() => {
+        errorMessage.classList.remove('is-hidden')
+        loading.classList.add('is-hidden')
+      }, 500)
+    }
+  </script>
 
-            <script>
-                    const scriptURL = 'https://script.google.com/macros/s/AKfycbwoiM-eEfuB2s9PKyjXxfYkbm10JjpwlO4Gw3vWTbZxe9xvQLg/exec'
-                    const form = document.forms['submit-to-google-sheet']
-                    const loading = document.querySelector('.js-loading')
-                    const successMessage = document.querySelector('.js-success-message')
-                    const errorMessage = document.querySelector('.js-error-message')
-                    form.addEventListener('submit', e => {
-                      e.preventDefault()
-                      showLoadingIndicator()
-                      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                        .then(response => showSuccessMessage(response))
-                        .catch(error => showErrorMessage(error))
-                    })
-                    function showLoadingIndicator () {
-                      form.classList.add('is-hidden')
-                      loading.classList.remove('is-hidden')
-                    }
-                    function showSuccessMessage (response) {
-                      console.log('Success!', response)
-                      setTimeout(() => {
-                        successMessage.classList.remove('is-hidden')
-                        loading.classList.add('is-hidden')
-                      }, 500)
-                    }
-                    function showErrorMessage (error) {
-                      console.error('Error!', error.message)
-                      setTimeout(() => {
-                        errorMessage.classList.remove('is-hidden')
-                        loading.classList.add('is-hidden')
-                      }, 500)
-                    }
-                  </script>
-                  
 </body>
 </html>
-
-
-
