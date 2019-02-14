@@ -1,170 +1,146 @@
+:root {
+      --accent: #F18260;
+      --purple: #252431;
+    }
 
-
-/*General */
-  body
-  {
-      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  }
-
-  div{
-      margin-bottom: 25px;
-  }
-  
-  #feedback-page{
-      text-align:center;
-  }
-  
-  #form-main{
-      width:100%;
-      float:left;
-      padding-top:0px;
-  }
-  
-  #form-div {
-      background-color:rgba(72,72,72,0.4);
-      padding-left:35px;
-      padding-right:35px;
-      padding-top:35px;
-      padding-bottom:50px;
-      width: 450px;
-      float: left;
-      left: 50%;
-      position: absolute;
-    margin-top:30px;
-      margin-left: -260px;
-    border-radius: 7px;
-    
-  }
-  
-  .montform .feedback-input {
-      color:#3c3c3c;
-      font-family: Helvetica, Arial, sans-serif;
-    font-weight:500;
-      font-size: 18px;
-      border-radius: 0;
-      line-height: 22px;
-      background-color: #fbfbfb;
-      padding: 13px 13px 13px 54px;
-      margin-bottom: 10px;
-      width:100%;
+    * {
       box-sizing: border-box;
-      border: 3px solid rgba(0,0,0,0);
-  }
-  /*Inputs styles*/
-  .montform .feedback-input:focus{
-      background: #fff;
-      border: 3px solid #3498db;
-      color: #3498db;
-      outline: none;
-    padding: 13px 13px 13px 54px;
-  }
-  
-  
-  /* Icons ---------------------------------- */
-  .montform  #name{
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #eee;
+      color: var(--purple);
+      padding: 10% 5%;
+      font-family: system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.4;
+    }
+
+    #name {
       background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-address-book.svg);
       background-size: 30px 30px;
       background-position: 11px 8px;
       background-repeat: no-repeat;
-  }
-  
-  .montform  #name:focus{
-      background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-address-book.svg);
-      background-size: 30px 30px;
-      background-position: 8px 5px;
-    background-position: 11px 8px;
-      background-repeat: no-repeat;
-  }
-  
-  .montform  #email{
+    }
+
+    #email {
       background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg);
       background-size: 30px 30px;
       background-position: 11px 8px;
       background-repeat: no-repeat;
-  }
-  
-  .montform  #email:focus{
-      background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg);
-      background-size: 30px 30px;
+    }
+
+    #url {
+      background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-link.svg);
+    background-size: 30px 30px;
     background-position: 11px 8px;
-      background-repeat: no-repeat;
-  }
-  
-  .montform  #comment{
+    background-repeat: no-repeat;
+    }
+
+    #message {
       background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-pencil.svg);
       background-size: 30px 30px;
       background-position: 11px 8px;
       background-repeat: no-repeat;
-  }
+    }
 
-  .montform #url{
-    background-image: url(https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-link.svg);
-    background-size: 30px 30px;
-    background-position: 11px 8px;
-    background-repeat: no-repeat;
-  }
+    input::placeholder {
+      margin-right: 50px;
+      text-align:  center;
+    }
 
-  
-  .montform  textarea {
+    .container {
+      margin-bottom: 20px;
+    }
+
+    .form-container {
+      position: relative;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 350px;
+      min-height: 300px;
+      margin: 0 auto;
+      box-shadow: 0 10px 50px 0 #ccc;
+      margin-bottom: 2rem;
+    }
+
+    input, button {
+      appearance: none;
+      border: none;
+      font-size: inherit;
+      background: #eee;
+      border-radius: 3px;
+      padding: 1rem;
       width: 100%;
-      height: 150px;
-      line-height: 150%;
-      resize:vertical;
-  }
-  
-  .montform  input:hover, .montform  textarea:hover,
-  .montform  input:focus, .montform  textarea:focus {
-      background-color:#e6e6e6;
-  }
-  
-  .button-blue{
-      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-      float:left;
-      width: 100%;
-      border: #fbfbfb solid 4px;
-      cursor:pointer;
-      background-color: #3498db;
-      color:white;
-      font-size:24px;
-      padding-top:22px;
-      padding-bottom:22px;
-      transition: all 0.3s;
-    margin-top:-4px;
-    font-weight:700;
-  }
-  
-  .button-blue:hover{
-      background-color: rgba(0,0,0,0);
-      color: #0493bd;
-  }
-      
-  .montform  .submit:hover {
-      color: #3498db;
-  }
-      
-  .ease {
-      width: 0px;
-      height: 74px;
-      background-color: #fbfbfb;
-      transition: .3s ease;
-  }
-  
-  .submit:hover .ease{
-    width:100%;
-    background-color:white;
-  }
-  
-  /*Styles for small screens*/
-  
-  @media  only screen and (max-width: 580px) {
-      #form-div{
-          left: 3%;
-          margin-right: 3%;
-          width: 88%;
-          margin-left: 0;
-          padding-left: 3%;
-          padding-right: 3%;
-      }
-  }
-  
-  
+    }
+
+    input {
+      margin-bottom: 1rem;
+    }
+
+    input:focus {
+      outline: 1px solid var(--accent);
+    }
+
+    button {
+      color: #fff;
+      cursor: pointer;
+      background-color: var(--purple);
+    }
+
+    button:hover {
+      background-color: var(--accent);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    @keyframes rotate {
+     100% { transform: rotate(360deg); }
+    }
+
+    @keyframes dash {
+     0% { stroke-dasharray: 1,200; stroke-dashoffset: 0; }
+     50% { stroke-dasharray: 89,200; stroke-dashoffset: -35; }
+     100% { stroke-dasharray: 89,200; stroke-dashoffset: -124; }
+    }
+
+    .loading {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+    }
+
+    .loading-spinner svg {
+      position: relative;
+      animation: rotate 2s linear infinite;
+      height: 50px;
+      width: 50px;
+    }
+
+    .loading-spinner circle {
+      stroke: var(--accent);
+      stroke-dasharray: 1,200;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      animation: dash 1.5s ease-in-out infinite;
+    }
